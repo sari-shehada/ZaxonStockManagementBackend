@@ -5,6 +5,14 @@ VisualStudioVersion = 17.14.36212.18 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaxon.CustomsStockManagement.Infrastructure", "Zaxon.CustomsStockManagement.Infrastructure\Zaxon.CustomsStockManagement.Infrastructure.csproj", "{76DF2BF0-B1D1-435C-8615-4FDE1A7DDE5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaxon.CustomsStockManagement.Application", "Zaxon.CustomsStockManagement.Application\Zaxon.CustomsStockManagement.Application.csproj", "{13E05D04-E366-47F2-AC05-B57C931F1405}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaxon.CustomsStockManagement.Domain", "Zaxon.CustomsStockManagement.Domain\Zaxon.CustomsStockManagement.Domain.csproj", "{C7123551-E0CD-457D-AD79-455732018C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaxon.CustomsStockManagement.Contracts", "Zaxon.CustomsStockManagement.Contracts\Zaxon.CustomsStockManagement.Contracts.csproj", "{CA13F142-31F3-4B99-8B07-54F12C6BC9B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaxon.CustomsStockManagement.Api", "Zaxon.CustomsStockManagement.Api\Zaxon.CustomsStockManagement.Api.csproj", "{E1CCD601-E13F-4820-9091-7A517070A695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{76DF2BF0-B1D1-435C-8615-4FDE1A7DDE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76DF2BF0-B1D1-435C-8615-4FDE1A7DDE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76DF2BF0-B1D1-435C-8615-4FDE1A7DDE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E05D04-E366-47F2-AC05-B57C931F1405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E05D04-E366-47F2-AC05-B57C931F1405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E05D04-E366-47F2-AC05-B57C931F1405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E05D04-E366-47F2-AC05-B57C931F1405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7123551-E0CD-457D-AD79-455732018C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7123551-E0CD-457D-AD79-455732018C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7123551-E0CD-457D-AD79-455732018C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7123551-E0CD-457D-AD79-455732018C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA13F142-31F3-4B99-8B07-54F12C6BC9B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA13F142-31F3-4B99-8B07-54F12C6BC9B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA13F142-31F3-4B99-8B07-54F12C6BC9B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA13F142-31F3-4B99-8B07-54F12C6BC9B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1CCD601-E13F-4820-9091-7A517070A695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CCD601-E13F-4820-9091-7A517070A695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CCD601-E13F-4820-9091-7A517070A695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CCD601-E13F-4820-9091-7A517070A695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

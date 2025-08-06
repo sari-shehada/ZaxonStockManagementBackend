@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zaxon.CustomsStockManagement.Application\Zaxon.CustomsStockManagement.Application.csproj" />
-  </ItemGroup>
-
 </Project>
