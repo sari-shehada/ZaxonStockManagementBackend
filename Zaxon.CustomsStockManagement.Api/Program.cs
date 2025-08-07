@@ -12,8 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//TODO: Create an extension method for DevHosting Env
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "DevelopmentHosting")
 {
     app.UseSwagger();
     app.UseSwaggerUI();

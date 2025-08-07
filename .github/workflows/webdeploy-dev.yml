@@ -1,0 +1,44 @@
+name: Web Deploy to Dev Server
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy via Web Deploy
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'  # Or your project version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Publish
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Save publish profile
+      run: |
+        echo "${{ secrets.MSDEPLOY_PUBLISH_PROFILE }}" > publish-profile.pubxml
+
+    - name: Deploy using Web Deploy
+      run: |
+        msdeploy.exe -source:contentPath="publish" ^
+                     -dest:contentPath="YourSiteName", ^
+                     -verb:sync ^
+                     -enableRule:DoNotDeleteRule ^
+                     -setParam:name='IIS Web Application Name',value='YourSiteName' ^
+                     -setParam:name='UserName',value='YourUserName' ^
+                     -setParam:name='Password',value='YourPassword' ^
+                     -allowUntrusted
