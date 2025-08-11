@@ -1,4 +1,4 @@
-name: Web Deploy to Dev Server
+name: Build, publish and deploy to MonsterASP.NET (DevelopmentHosting)
 
 on:
   push:
@@ -6,39 +6,33 @@ on:
       - dev
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy via Web Deploy
+  build_and_deploy:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'  # Or your project version
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Install dependencies
+        run: dotnet restore
+        
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Build
-      run: dotnet build --configuration Release
+      - name: Publish
+        run: dotnet publish --configuration Release --output ./publish --runtime win-x86 
+        
+      # - name: Test with .NET
+      #   run: dotnet test
 
-    - name: Publish
-      run: dotnet publish -c Release -o ./publish
-
-    - name: Save publish profile
-      run: |
-        echo "${{ secrets.MSDEPLOY_PUBLISH_PROFILE }}" > publish-profile.pubxml
-
-    - name: Deploy using Web Deploy
-      run: |
-        msdeploy.exe -source:contentPath="publish" ^
-                     -dest:contentPath="YourSiteName", ^
-                     -verb:sync ^
-                     -enableRule:DoNotDeleteRule ^
-                     -setParam:name='IIS Web Application Name',value='YourSiteName' ^
-                     -setParam:name='UserName',value='YourUserName' ^
-                     -setParam:name='Password',value='YourPassword' ^
-                     -allowUntrusted
+      - name: Deploy to MonsterASP.NET via WebDeploy
+        uses: rasmusbuchholdt/simply-web-deploy@2.1.0
+        with:
+          website-name: ${{ secrets.WEBSITE_NAME }}
+          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+          server-username: ${{ secrets.SERVER_USERNAME }}
+          server-password: ${{ secrets.SERVER_PASSWORD }}
