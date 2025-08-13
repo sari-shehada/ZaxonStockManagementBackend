@@ -2,7 +2,8 @@
 
 public class AuthResult
 {
-
+    public required string AccessToken { get; set; }
+    public required UserDto User { get; set; }
 }
 
 public class TokenPair
