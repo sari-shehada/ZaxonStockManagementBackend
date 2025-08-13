@@ -1,28 +1,32 @@
-using Zaxon.CustomsStockManagement.Infrastructure.Config;
+using Zaxon.CustomsStockManagement.Application;
+using Zaxon.CustomsStockManagement.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.ConfigureInfrastructure(builder.Configuration);
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-var app = builder.Build();
-
-//TODO: Create an extension method for DevHosting Env
-if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "DevelopmentHosting")
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.Services
+        .AddInfrastructure(builder.Configuration)
+        .AddApplication();
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 }
 
-app.UseHttpsRedirection();
+var app = builder.Build();
+{
 
-app.UseAuthorization();
+    //TODO: Create an extension method for DevHosting Env
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "DevelopmentHosting")
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+    app.UseHttpsRedirection();
 
-app.MapControllers();
+    app.UseAuthorization();
 
-app.Run();
+    app.MapControllers();
+
+    app.Run();
+
+}
