@@ -13,6 +13,7 @@ public static class DependencyInjection
         return services
             .ConfigureDbContext(configuration)
             .ConfigureRepositories()
-            .ConfigureServices();
+            .ConfigureServices()
+            .ConfigureApplicationOptions(configuration);
     }
 }
