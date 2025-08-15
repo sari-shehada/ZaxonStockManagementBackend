@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Zaxon.CustomsStockManagement.Application.Common.Auth;
 using Zaxon.CustomsStockManagement.Domain.Entities;
 
@@ -8,11 +9,21 @@ public class UserClaimsHandler : IUserClaimsHandler
 {
     public List<Claim> GenerateClaimsList(DomainUser user)
     {
-        throw new NotImplementedException();
+        var userClaims = new UserClaims()
+        {
+            Id = user.Id,
+            FullName = user.FullName,
+        };
+
+        return GenerateClaimsList(userClaims);
     }
 
     public List<Claim> GenerateClaimsList(UserClaims userClaims)
     {
-        throw new NotImplementedException();
+        return new List<Claim>()
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, userClaims.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Name, userClaims.FullName),
+        };
     }
 }
