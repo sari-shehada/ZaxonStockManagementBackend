@@ -1,4 +1,5 @@
 using Zaxon.CustomsStockManagement.Application;
+using Zaxon.CustomsStockManagement.Application.Common.DataSeeding;
 using Zaxon.CustomsStockManagement.Infrastructure;
 
 
@@ -14,7 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    using (var scope  = app.Services.CreateScope())
+    {
+        var seedingService = scope.ServiceProvider.GetRequiredService<IDataSeedingService>();
 
+        await seedingService.SeedApplicationData();
+    }
     //TODO: Create an extension method for DevHosting Env
     if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "DevelopmentHosting")
     {
