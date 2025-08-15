@@ -1,6 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Zaxon.CustomsStockManagement.Api.Common.BuildConfigurations;
 using Zaxon.CustomsStockManagement.Application;
 using Zaxon.CustomsStockManagement.Application.Common.DataSeeding;
 using Zaxon.CustomsStockManagement.Infrastructure;
+using Zaxon.CustomsStockManagement.Infrastructure.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,16 +20,21 @@ var app = builder.Build();
 {
     using (var scope  = app.Services.CreateScope())
     {
-        var seedingService = scope.ServiceProvider.GetRequiredService<IDataSeedingService>();
+        if(app.Environment.IsDevelopmentHosting())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<StockManagementDbContext>();
+            await context.Database.MigrateAsync();
+        }
 
+        var seedingService = scope.ServiceProvider.GetRequiredService<IDataSeedingService>();
         await seedingService.SeedApplicationData();
     }
-    //TODO: Create an extension method for DevHosting Env
-    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "DevelopmentHosting")
+    if (app.Environment.IsDevelopment() || app.Environment.IsDevelopmentHosting())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
