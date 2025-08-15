@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Zaxon.CustomsStockManagement.Application.Services.Auth.Commands;
+using Zaxon.CustomsStockManagement.Contracts.Auth.Login;
 
 namespace Zaxon.CustomsStockManagement.Api.Controllers;
 
@@ -16,16 +17,16 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login()
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var command = new LoginCommand()
         {
-            Username = "sari",
-            Password = "sari12345"
+            Username = request.Username,
+            Password = request.Password,
         };
 
         var loginResult = await sender.Send(command);
 
-        throw new NotImplementedException();
+        return Ok(loginResult);
     }
 }
